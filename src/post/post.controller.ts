@@ -11,6 +11,7 @@ import {
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { PostExitsPipe } from './pipes/post-exists.pipe';
 
 @Controller('post')
 export class PostController {
@@ -27,7 +28,7 @@ export class PostController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id', ParseIntPipe , PostExitsPipe) id: number) {
     return this.postService.findOne(id);
   }
 
@@ -40,7 +41,7 @@ export class PostController {
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Param('id', ParseIntPipe , PostExitsPipe) id: number) {
     return this.postService.remove(id);
   }
 }
